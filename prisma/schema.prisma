@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum usersProfileEnum{
+  SUPERADMIN
+  STUDENT
+  TEACHER
+  DIRECTOR
+}
+
+enum disciplineTypeEnum{
+  EAD
+  PRESENCIAL
+  SEMIPRESENCIAL
+}
+
+model Users{
+  id Int @id @default(autoincrement())
+  name String
+  document String @unique
+  matricula String @unique
+  email String @unique
+  password String
+  cell_phone String?
+  home_phone String?
+  profile String?
+  gender String?
+  rg String?
+  photo_url String?
+  refreshToken String?
+  online Boolean @default(true)
+  active Boolean? @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Classes{
+  id Int @id @default(autoincrement())
+  name String 
+  code String
+  institution_id Int?
+  period String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Instituitions{
+  id Int @id @default(autoincrement())
+  name String 
+  email String @unique
+  slug String?
+  phone String?
+  zip_code String
+  city String
+  district String
+  state String
+  street String
+  streetNumber String
+  logo_url String?
+  complement String
+  user_direcort_id Int?
+  client_id Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Disciplines{
+  id Int @id @default(autoincrement())
+  name String @unique
+  code String
+  disciplineType disciplineTypeEnum?
+  active Boolean? @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
