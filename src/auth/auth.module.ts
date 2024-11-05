@@ -6,14 +6,15 @@ import { jwtSecret } from '../env/envoriment';
 import { UsersModule } from 'src/users/users.module';
 
 @Module({
-  imports: [JwtModule.register({
-    secret: jwtSecret,
-    signOptions: { expiresIn: '1d' }
-  }),
-  forwardRef(() => UsersModule)
+  imports: [
+    JwtModule.register({
+      secret: jwtSecret,
+      signOptions: { expiresIn: '1d' },
+    }),
+    forwardRef(() => UsersModule),
   ],
   controllers: [AuthController],
   providers: [AuthService],
-  exports: [AuthService]
+  exports: [AuthService],
 })
 export class AuthModule {}

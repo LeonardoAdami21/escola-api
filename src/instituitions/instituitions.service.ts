@@ -29,26 +29,28 @@ export class InstituitionsService {
         state,
         district,
       } = dto;
-      let director_id:number = null;
+      let director_id: number = null;
       if (!name || !email) {
         throw new BadRequestException('Name and email are required');
       }
 
-      const emailExists = await this.instituitionsRepository.instituitions.findFirst({
-        where: {
-          email: email,
-        },
-      })  
-      
+      const emailExists =
+        await this.instituitionsRepository.instituitions.findFirst({
+          where: {
+            email: email,
+          },
+        });
+
       if (emailExists) {
         throw new ConflictException('Email already exists');
       }
 
-      const clientExists = await this.instituitionsRepository.instituitions.findFirst({
-        where: {
-          client_id: dto.client_id
-        }
-      })
+      const clientExists =
+        await this.instituitionsRepository.instituitions.findFirst({
+          where: {
+            client_id: dto.client_id,
+          },
+        });
 
       if (clientExists) {
         throw new NotFoundException('Client not found');
@@ -67,7 +69,7 @@ export class InstituitionsService {
             state,
             district,
             user_direcort_id: director_id,
-            client_id: dto.client_id
+            client_id: dto.client_id,
           },
         });
       return {
@@ -75,7 +77,7 @@ export class InstituitionsService {
         data: instituition,
       };
     } catch (error) {
-      throw new InternalServerErrorException({message: error.message});
+      throw new InternalServerErrorException({ message: error.message });
     }
   }
 

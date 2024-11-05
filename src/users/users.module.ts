@@ -6,14 +6,15 @@ import { AuthModule } from '../auth/auth.module';
 import { PrismaClient } from '@prisma/client';
 
 @Module({
-  imports: [DatabaseModule,
-    forwardRef(() => AuthModule)
-  ],
+  imports: [DatabaseModule, forwardRef(() => AuthModule)],
   controllers: [UsersController],
-  providers: [UsersService, {
-    provide: 'USERS_REPOSITORY',
-    useClass: PrismaClient
-  } ],
-  exports: [UsersService]
+  providers: [
+    UsersService,
+    {
+      provide: 'USERS_REPOSITORY',
+      useClass: PrismaClient,
+    },
+  ],
+  exports: [UsersService],
 })
 export class UsersModule {}

@@ -68,7 +68,9 @@ export class InstituitionsController {
   }
 
   @ApiOperation({ summary: 'Remover uma universidade.' })
-  @ApiCreatedResponse({ description: 'A universidade foi removida com sucesso.' })
+  @ApiCreatedResponse({
+    description: 'A universidade foi removida com sucesso.',
+  })
   @ApiNotFoundResponse({ description: 'Universidade não encontrada.' })
   @ApiInternalServerErrorResponse({ description: 'Erro interno do servidor.' })
   @Delete(':id')

@@ -5,9 +5,12 @@ import { PrismaClient } from '@prisma/client';
 
 @Module({
   controllers: [ClientsController],
-  providers: [ClientsService, {
-    provide: 'CLIENTS_REPOSITORY',
-    useClass: PrismaClient,
-  }],
+  providers: [
+    ClientsService,
+    {
+      provide: 'CLIENTS_REPOSITORY',
+      useClass: PrismaClient,
+    },
+  ],
 })
 export class ClientsModule {}

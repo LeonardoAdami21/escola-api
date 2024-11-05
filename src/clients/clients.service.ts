@@ -29,13 +29,13 @@ export class ClientsService {
         streetNumber: createClientDto.street_number,
         complement: createClientDto.complement,
         state_registry: createClientDto.state_registry,
-        manager_id: createClientDto.manager_id,      
+        manager_id: createClientDto.manager_id,
       },
     });
     return {
       message: 'client created successfully',
       data: client,
-    }
+    };
   }
 
   async findAll() {
@@ -47,22 +47,22 @@ export class ClientsService {
     const client = await this.clientsRepository.clients.findUnique({
       where: {
         id: id,
-      }
-    })
-    if(!client) {
-      throw new NotFoundException('Client not found')
+      },
+    });
+    if (!client) {
+      throw new NotFoundException('Client not found');
     }
-    return client
+    return client;
   }
 
   async update(id: number, updateClientDto: UpdateClientDto) {
     const client = await this.clientsRepository.clients.findUnique({
       where: {
         id: id,
-      }
-    })
-    if(!client) {
-      throw new NotFoundException('Client not found')
+      },
+    });
+    if (!client) {
+      throw new NotFoundException('Client not found');
     }
     await this.clientsRepository.clients.update({
       where: {
@@ -82,30 +82,30 @@ export class ClientsService {
         complement: updateClientDto.complement,
         state_registry: updateClientDto.state_registry,
         manager_id: updateClientDto.manager_id,
-      }
-    })
+      },
+    });
 
-    return {  
+    return {
       message: 'client updated successfully',
-    }
+    };
   }
 
   async remove(id: number) {
     const client = await this.clientsRepository.clients.findUnique({
       where: {
         id: id,
-      }
-    })
-    if(!client) {
-      throw new NotFoundException('Client not found')
+      },
+    });
+    if (!client) {
+      throw new NotFoundException('Client not found');
     }
     await this.clientsRepository.clients.delete({
       where: {
         id: id,
-      }
-    })
+      },
+    });
     return {
       message: 'client deleted successfully',
-    }
+    };
   }
 }

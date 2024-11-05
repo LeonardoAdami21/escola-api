@@ -26,7 +26,7 @@ async function bootstrap() {
 bootstrap().catch(async (e) => {
   new Logger('main.ts').error(e);
 
-  const url = discordFailureUrl
+  const url = discordFailureUrl;
   const msg = typeof e?.message === 'string' ? e.message : '';
 
   await sendDiscordMessage(

@@ -7,8 +7,14 @@ import { InstituitionsModule } from './instituitions/instituitions.module';
 import { ClientsModule } from './clients/clients.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true }), AuthModule, UsersModule, InstituitionsModule, ClientsModule],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    AuthModule,
+    UsersModule,
+    InstituitionsModule,
+    ClientsModule,
+  ],
   providers: [...databaseProviders],
-  exports: [...databaseProviders]
+  exports: [...databaseProviders],
 })
 export class AppModule {}
