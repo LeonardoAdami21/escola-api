@@ -69,9 +69,30 @@ model Instituitions{
   street String
   streetNumber String
   logo_url String?
-  complement String
+  complement String?
   user_direcort_id Int?
   client_id Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Clients{
+  id Int @id @default(autoincrement())
+  corporate_name String
+  email String @unique
+  cnpj String @unique
+  state_registry String
+  manager_id Int
+  phone String
+  slug String?
+  zip_code String
+  city String
+  district String
+  state String
+  street String
+  streetNumber String
+  logo_url String?
+  complement String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
